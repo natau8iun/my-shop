@@ -1,0 +1,11 @@
+        .morning-theme {
+            background-color: #fff5e1;
+            color: #333;
+        }
+        .night-theme {
+            background-color: #222;
+            color: #ddd;
+        }
+        .mobile-theme {
+            font-size: 18px;
+        }

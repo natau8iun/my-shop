@@ -1,0 +1,13 @@
+        document.addEventListener("DOMContentLoaded", function () {
+            let hour = new Date().getHours();
+            let isMobile = window.innerWidth < 768;
+            let body = document.body;
+
+            if (isMobile) {
+                body.classList.add("mobile-theme");
+            } else if (hour >= 6 && hour < 12) {
+                body.classList.add("morning-theme");
+            } else if (hour >= 18 || hour < 6) {
+                body.classList.add("night-theme");
+            }
+        });

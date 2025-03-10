@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #a100ff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #7a00cc;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background: #6200a3;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .content h2 {
+            color: #7a00cc;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+        }
+        .contact-info strong {
+            color: #333;
+        }
+/* Темная (вечерняя) тема */
+        .dark-theme {
+            background-color: #2b2b2b;
+            color: #e5e5e5;
+        }
+        .dark-theme .container {
+            background-color: #3a3a3a;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .dark-theme header {
+            background-color: #5a2d82;
+        }
+        .dark-theme .cart-item {
+            border-bottom: 1px solid #555;
+        }
+        .dark-theme .order-button {
+            background-color: #6a1b9a;
+        }
+        .dark-theme .order-button:hover {
+            background-color: #8124c7;
+        }
+    /* Делаем текст заметнее в темной теме */
+    .dark-theme .contact-info {
+        color: #ffffff; /* Белый цвет текста */
+        font-weight: bold; /* Жирный шрифт */
+        font-size: 20px; /* Увеличенный размер шрифта */
+    }
+    /* Делаем заголовки (Телефон, Email и т. д.) светло-серыми */
+    .dark-theme .contact-info strong {
+    color: #d3d3d3; 
+    }
+        /* Утренняя тема (чистый минимализм) */
+        .morning-theme {
+            background-color: #fffbe6;
+        }
+        .morning-theme .container {
+            background-color: #fffff8;
+        }
+
+        /* Мобильная версия */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .quantity-controls {
+                margin-top: 5px;
+            }
+            .order-button, .home-button {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>Контакты</header>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="contact.html">Контакты</a>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <h2>Свяжитесь с нами</h2>
+            <p>Если у вас есть вопросы, напишите или позвоните нам.</p>
+            <div class="contact-info">
+                <p><strong>Телефон:</strong> +7 (900) 123-45-67</p>
+                <p><strong>Email:</strong> info@flowershop.ru</p>
+                <p><strong>Адрес:</strong> ул. Цветочная, д. 10, г. Москва</p>
+                <p><strong>Часы работы:</strong> с 9:00 до 21:00 ежедневно</p>
+            </div>
+        </div>
+    </div>
+ <script>
+        function applyTheme() {
+            let hour = new Date().getHours();
+            let body = document.body;
+
+            if (hour >= 6 && hour < 12) {
+                body.classList.add('morning-theme'); // Утренняя тема
+            } else if (hour >= 18 || hour < 6) { 
+                body.classList.add('dark-theme'); // Вечерняя тема
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            applyTheme();
+        });
+ </script>
+
+</body>
+</html>

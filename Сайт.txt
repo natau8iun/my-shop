@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цветочный магазин</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #ffebf0; color: #333; }
+        .container { width: 80%; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-around; }
+        header { background-color: #ff66b2; padding: 20px; text-align: center; color: white; font-size: 24px; }
+        nav { text-align: center; margin: 15px 0; }
+        nav a { margin: 0 15px; text-decoration: none; color: #ff66b2; font-weight: bold; }
+        .product { width: 30%; margin: 1%; padding: 10px; background: white; border-radius: 8px; text-align: center; }
+        .product img { width: 100%; border-radius: 8px; }
+        .cart { background-color: #ff99cc; padding: 10px; text-align: center; margin-top: 20px; }
+        .filter { text-align: center; margin: 20px; }
+        .filter select, .search input { padding: 5px; font-size: 16px; }
+        .search { text-align: center; margin: 20px; }
+    </style>
+    <script>
+        let cartCount = 0;
+        function addToCart() {
+            cartCount++;
+            document.getElementById("cart").innerText = `Корзина (${cartCount} товаров)`;
+        }
+
+        function filterProducts() {
+            let category = document.getElementById("category").value;
+            let products = document.querySelectorAll(".product");
+            
+            products.forEach(product => {
+                let productName = product.querySelector("h3").innerText;
+                if (category === "Все" || productName.includes(category)) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
+
+        function searchProducts() {
+            let query = document.getElementById("search").value.toLowerCase();
+            let products = document.querySelectorAll(".product");
+            
+            products.forEach(product => {
+                let productName = product.querySelector("h3").innerText.toLowerCase();
+                if (productName.includes(query)) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>Добро пожаловать в цветочный магазин!</header>
+    <nav>
+        <a href="#">Главная</a>
+        <a href="#">Каталог</a>
+        <a href="#">О нас</a>
+        <a href="#">Контакты</a>
+    </nav>
+    <div class="filter">
+        <label for="category">Фильтр по категории:</label>
+        <select id="category" onchange="filterProducts()">
+            <option>Все</option>
+            <option>Розы</option>
+            <option>Тюльпаны</option>
+            <option>Лилии</option>
+        </select>
+    </div>
+    <div class="search">
+        <label for="search">Поиск:</label>
+        <input type="text" id="search" oninput="searchProducts()" placeholder="Введите название цветка">
+    </div>
+    <div class="container">
+        <div class="product">
+            <img src="flower1.jpg" alt="Роза">
+            <h3>Роза</h3>
+            <p>Цена: 500 руб.</p>
+            <button onclick="addToCart()">Добавить в корзину</button>
+        </div>
+        <div class="product">
+            <img src="flower2.jpg" alt="Тюльпан">
+            <h3>Тюльпан</h3>
+            <p>Цена: 300 руб.</p>
+            <button onclick="addToCart()">Добавить в корзину</button>
+        </div>
+        <div class="product">
+            <img src="flower3.jpg" alt="Лилия">
+            <h3>Лилия</h3>
+            <p>Цена: 400 руб.</p>
+            <button onclick="addToCart()">Добавить в корзину</button>
+        </div>
+    </div>
+    <div class="cart" id="cart">Корзина (0 товаров)</div>
+</body>
+</html>

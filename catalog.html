@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #a100ff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #7a00cc;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background: #6200a3;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .product img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .cart-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 90px;
+            height: 90px;
+            background-color: #a100ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+        .cart-icon {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+        }
+        .cart-label {
+            position: fixed;
+            bottom: 10px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+/* Стили кнопки "Добавить в корзину", как на главной */
+.add-to-cart {
+    background-color: #a100ff; /* Фиолетовый, как кнопка на главной */
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.add-to-cart:hover {
+    background-color: #7a00cc; /* Темнее при наведении */
+    transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Темная тема */
+.dark-theme .add-to-cart {
+    background-color: #6a1b9a; 
+}
+
+.dark-theme .add-to-cart:hover {
+    background-color: #8124c7;
+}
+
+/* Утренняя тема */
+.morning-theme .add-to-cart {
+    background-color: #ffcc66; /* Теплый желтый */
+    color: #333;
+}
+
+.morning-theme .add-to-cart:hover {
+    background-color: #e6a856;
+}
+
+/* Темная (вечерняя) тема */
+        .dark-theme {
+            background-color: #2b2b2b;
+            color: #e5e5e5;
+        }
+        .dark-theme .container {
+            background-color: #3a3a3a;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .dark-theme header {
+            background-color: #5a2d82;
+        }
+        .dark-theme .cart-item {
+            border-bottom: 1px solid #555;
+        }
+        .dark-theme .order-button {
+            background-color: #6a1b9a;
+        }
+        .dark-theme .order-button:hover {
+            background-color: #8124c7;
+        }
+/* Делаем названия цветов крупнее и жирнее */
+.product h3 {
+    font-size: 22px; /* Увеличенный размер */
+    font-weight: bold; /* Жирный шрифт */
+    color: #7a00cc; /* Фиолетовый, как в шапке */
+}
+
+/* Цена также увеличена и выделена */
+.product p {
+    font-size: 18px; /* Чуть больше */
+    font-weight: bold;
+    color: #333; /* Темный цвет для контраста */
+}
+
+/* Темная тема */
+.dark-theme .product h3 {
+    color: #d8a3ff; /* Светло-фиолетовый для лучшей видимости */
+}
+
+.dark-theme .product p {
+    color: #bbbbbb; /* Светло-серый текст */
+}
+
+        /* Утренняя тема (чистый минимализм) */
+        .morning-theme {
+            background-color: #fffbe6;
+        }
+        .morning-theme .container {
+            background-color: #fffff8;
+        }
+
+
+        /* Мобильная версия */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .quantity-controls {
+                margin-top: 5px;
+            }
+            .order-button, .home-button {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+
+    </style>
+    <script>
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || {};
+            cart[product] = (cart[product] || 0) + 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(product + ' добавлен в корзину!');
+        }
+    </script>
+</head>
+<body>
+    <header>Каталог</header>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="contact.html">Контакты</a>
+    </nav>
+    <div class="container">
+        <div class="product">
+            <img src="rozi.jpg" alt="Розы">
+            <h3>Розы</h3>
+            <p>Цена: 500 руб.</p>
+            <button class="add-to-cart" onclick="addToCart('Розы')">Добавить в корзину</button>
+        </div>
+        <div class="product">
+            <img src="tulpany.jpg" alt="Тюльпаны">
+            <h3>Тюльпаны</h3>
+            <p>Цена: 300 руб.</p>
+            <button class="add-to-cart" onclick="addToCart('Тюльпаны')">Добавить в корзину</button>
+        </div>
+        <div class="product">
+            <img src="lilii.jpg" alt="Лилии">
+            <h3>Лилии</h3>
+            <p>Цена: 400 руб.</p>
+            <button class="add-to-cart" onclick="addToCart('Лилии')">Добавить в корзину</button>
+        </div>
+    </div>
+    <a href="cart.html" class="cart-container">
+        <img src="cart-icon.jpg" alt="Корзина" class="cart-icon">
+    </a>
+    <div class="cart-label">Корзина</div>
+ <script>
+        function applyTheme() {
+            let hour = new Date().getHours();
+            let body = document.body;
+
+            if (hour >= 6 && hour < 12) {
+                body.classList.add('morning-theme'); // Утренняя тема
+            } else if (hour >= 18 || hour < 6) { 
+                body.classList.add('dark-theme'); // Вечерняя тема
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            applyTheme();
+        });
+ </script>
+
+</body>
+</html>
